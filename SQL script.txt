@@ -1,0 +1,95 @@
+
+CREATE TABLE Patients (
+    patient_id INT PRIMARY KEY AUTO_INCREMENT,
+    patient_name VARCHAR(100),
+    age INT,
+    gender VARCHAR(10),
+    phone_number VARCHAR(20),
+    address VARCHAR(255)
+);
+
+CREATE TABLE Doctors (
+    doctor_id INT PRIMARY KEY AUTO_INCREMENT,
+    doctor_name VARCHAR(100),
+    specialty VARCHAR(50),
+    phone_number VARCHAR(20),
+    email VARCHAR(100)
+);
+
+CREATE TABLE Appointments (
+    appointment_id INT PRIMARY KEY AUTO_INCREMENT,
+    patient_id INT,
+    doctor_id INT,
+    appointment_date DATE,
+    appointment_time TIME,
+    status VARCHAR(50),
+    FOREIGN KEY (patient_id) REFERENCES Patients(patient_id),
+    FOREIGN KEY (doctor_id) REFERENCES Doctors(doctor_id)
+);
+
+CREATE TABLE Departments (
+    department_id INT PRIMARY KEY AUTO_INCREMENT,
+    department_name VARCHAR(100),
+    floor_number INT
+);
+
+CREATE TABLE Rooms (
+    room_id INT PRIMARY KEY AUTO_INCREMENT,
+    room_number VARCHAR(10),
+    department_id INT,
+    is_occupied BOOLEAN,
+    FOREIGN KEY (department_id) REFERENCES Departments(department_id)
+);
+
+CREATE TABLE Treatments (
+    treatment_id INT PRIMARY KEY AUTO_INCREMENT,
+    patient_id INT,
+    doctor_id INT,
+    treatment_description VARCHAR(255),
+    start_date DATE,
+    end_date DATE,
+    FOREIGN KEY (patient_id) REFERENCES Patients(patient_id),
+    FOREIGN KEY (doctor_id) REFERENCES Doctors(doctor_id)
+);
+
+CREATE TABLE Medications (
+    medication_id INT PRIMARY KEY AUTO_INCREMENT,
+    medication_name VARCHAR(100),
+    dosage VARCHAR(50),
+    price DECIMAL(10,2),
+    stock_quantity INT
+);
+
+CREATE TABLE LaboratoryTests (
+    test_id INT PRIMARY KEY AUTO_INCREMENT,
+    patient_id INT,
+    test_name VARCHAR(100),
+    test_date DATE,
+    result VARCHAR(255),
+    FOREIGN KEY (patient_id) REFERENCES Patients(patient_id)
+);
+
+CREATE TABLE Billing (
+    bill_id INT PRIMARY KEY AUTO_INCREMENT,
+    patient_id INT,
+    bill_date DATE,
+    total_amount DECIMAL(10,2),
+    payment_status VARCHAR(50),
+    FOREIGN KEY (patient_id) REFERENCES Patients(patient_id)
+);
+
+CREATE TABLE Nurses (
+    nurse_id INT PRIMARY KEY AUTO_INCREMENT,
+    nurse_name VARCHAR(100),
+    phone_number VARCHAR(20),
+    department_id INT,
+    FOREIGN KEY (department_id) REFERENCES Departments(department_id)
+);
+
+
+
+
+
+
+
+
