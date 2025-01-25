@@ -1,0 +1,3 @@
+http://localhost/hospital_system/dashboard.php
+http://localhost/phpmyadmin/
+
